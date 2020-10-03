@@ -1,4 +1,5 @@
 import React from 'react';
+import UserLists from './UserLists';
 
 export default class LoginComponent extends React.Component{
     constructor(props) {
@@ -20,6 +21,7 @@ export default class LoginComponent extends React.Component{
     
       handleSubmit(event) {
         var url = 'http://54.172.198.86:8080/api-token-auth/';
+        // var url = 'http://127.0.0.1:8000/api-token-auth/';
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -27,20 +29,38 @@ export default class LoginComponent extends React.Component{
         };
         fetch(url, requestOptions)
             .then(response => response.json())
-            .then(data => localStorage.setItem('token', data.token));
+            .then(data => {
+              localStorage.setItem('token', data.token);
+              this.setState({token: data.token});
+            });
         event.preventDefault();
+      }
+
+      logout(){
+        localStorage.removeItem('token');
+        this.setState({token: null});
       }
     
       render() {
-        return (
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Nome:
-              <input type="text" value={this.state.username} onChange={this.handleChange} />
-              <input type="password" value={this.state.password} onChange={this.handlePassword} />
-            </label>
-            <input type="submit" value="Enviar" />
-          </form>
-        );
+        var token = localStorage.getItem('token');
+        if(!token)
+          return (
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                Nome:
+                <input type="text" value={this.state.username} onChange={this.handleChange} />
+                <input type="password" value={this.state.password} onChange={this.handlePassword} />
+              </label>
+              <input type="submit" value="Enviar" />
+            </form>
+          );
+        else
+            return (
+              <div>
+                <UserLists/>
+                <button onClick={() => this.logout()}> Logout </button>
+              </div>
+            )
+
       }
 }
