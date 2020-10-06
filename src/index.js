@@ -1,20 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import UserLists from './UserLists'; 
-import LoginComponent from './LoginComponent';
+import Main from './Main';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <LoginComponent/>
-    {/* <UserLists /> */}
-    {/* <App /> */}
-  </React.StrictMode>,
+  <Container>
+    <Main />,
+  </Container>,
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

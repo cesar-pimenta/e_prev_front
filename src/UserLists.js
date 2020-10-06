@@ -12,8 +12,8 @@ export default class UserLists extends React.Component{
         }
         config.headers['Authorization'] = 'Token ' + localStorage.getItem('token');
         
-        var url = 'http://54.172.198.86:8080/orders/';
-        // var url = 'http://127.0.0.1:8000/orders/'
+        // var url = 'http://54.172.198.86:8080/orders/';
+        var url = 'http://127.0.0.1:8000/orders/'
         const response = await fetch(url, config);
         const data = await response.json();
         console.log(data.results);

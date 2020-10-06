@@ -8,7 +8,7 @@ export default function OrderComponent(props){
         <div>
             <h2> { props.OrderName } </h2>
             <ul>
-                {items.map(item => <ItemComponent key={item.id} name={item.product}/>)}
+                {/* {items.map(item => <ItemComponent key={item.id} name={item.product}/>)} */}
             </ul>
         </div>
     )
